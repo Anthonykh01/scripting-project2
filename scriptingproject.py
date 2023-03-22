@@ -103,4 +103,19 @@ href_links = re.findall(href_regex, html_content)
 for link in href_links:
     with open("files_output.bat", "a") as file:
      file.write(link+"\n")
-    
+
+with open('directories_output.bat', 'r') as file:
+    for line in file:
+        response = requests.get(line)
+        html_content = response.text
+
+        # Define a regular expression to match all href links
+        href_regex = r'href=[\'"]?([^\'" >]+)'
+
+        # Use regex to find all href links in the HTML content
+        href_links = re.findall(href_regex, html_content)
+
+        # Print the href links found
+        for link in href_links:
+            with open("files_output.bat", "a") as file:
+            file.write(link+"\n")
