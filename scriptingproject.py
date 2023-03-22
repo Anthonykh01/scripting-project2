@@ -18,6 +18,9 @@ import requests
 # response = requests.get(url)
 
 # print(response.text)
+with open("subdomain_success.txt", "w") as file:
+    file.truncate(0)
+
 url = input('What is your url? ')
 print('the url is ,', url)
 after_www=url.split("www.")[1]
@@ -35,15 +38,23 @@ with open('subdomains_dictionary.bat', 'r') as file:
             if response.status_code == 200:
                 print('Request was successful.')
                 print(url)
+                with open("output.txt", "w") as file:
+                    # Write the string to the file
+                    file.write("This is a string that will be written to the file")
         except requests.exceptions.ConnectionError:
                 # handle the connection error
                 # print('no')
-                null
+                None
         #  else:
         #     print('Request failed with status code:', response.status_code)
         #     print(url)
         
 
+# Open the file in write mode with truncate set to 0
+with open("output.txt", "w") as file:
+    file.truncate(0)
+    # Write the string to the file
+    file.write("This is a string that will be written to the file")
 
 # try:
 #     response = requests.get(url)
