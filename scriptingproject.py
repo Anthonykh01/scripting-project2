@@ -18,39 +18,40 @@ import requests
 # response = requests.get(url)
 
 # print(response.text)
-with open("subdomain_success.txt", "w") as file:
+
+with open("subdomains_output.bat", "w") as file:
     file.truncate(0)
-with open("directory_success.txt", "w") as file:
+with open("directories_output.bat", "w") as file:
     file.truncate(0)
 
 
 url = input('What is your url? ')
 print('the url is ,', url)
 after_www=url.split("www.")[1]
-# with open('subdomains_dictionary.bat', 'r') as file:
-#     for line in file:
+with open('subdomains_dictionary.bat', 'r') as file:
+    for line in file:
          
-#         line = line.strip()
+        line = line.strip()
         
-#         if line.endswith('.'):
-#             url = 'https://www.' + line[:-1] + '.' +after_www
-#         else:
-#             url = 'https://www.' + line + '.' + after_www
-#         try:
-#             response = requests.get(url)
-#             if response.status_code == 200:
-#                 print('Request was successful.')
-#                 print(url)
-#                 with open("subdomain_success.txt", "w") as file:
-#                     # Write the string to the file
-#                     file.write(url)
-#         except requests.exceptions.ConnectionError:
-#                 # handle the connection error
-#                 # print('no')
-#                 None
+        if line.endswith('.'):
+            url = 'https://www.' + line[:-1] + '.' +after_www
+        else:
+            url = 'https://www.' + line + '.' + after_www
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                print('Request was successful.')
+                print(url)
+                with open("subdomains_output.bat", "a") as file:
+                    # Write the string to the file
+                    file.write(url+"\n")
+        except requests.exceptions.ConnectionError:
+                # handle the connection error
+                print('no')
+                # None
 #         #  else:
-#         #     print('Request failed with status code:', response.status_code)
-#         #     print(url)
+        #     print('Request failed with status code:', response.status_code)
+        #     print(url)
         
 with open('dirs_dictionary.bat', 'r') as file:
     for line in file:
@@ -64,9 +65,9 @@ with open('dirs_dictionary.bat', 'r') as file:
             if response.status_code == 200:
                 print('Request was successful.')
                 print(url)
-                with open("directory_success.txt", "w") as file:
+                with open("directories_output.bat", "a") as file:
                     # Write the string to the file
-                    file.write(url)
+                    file.write(url+"\n")
         except requests.exceptions.ConnectionError:
                 # handle the connection error
                  print('no')
