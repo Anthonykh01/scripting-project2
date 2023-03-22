@@ -19,10 +19,12 @@ import re
 
 # print(response.text)
 
-# with open("subdomains_output.bat", "w") as file:
-#     file.truncate(0)
-# with open("directories_output.bat", "w") as file:
-#     file.truncate(0)
+with open("subdomains_output.bat", "w") as file:
+    file.truncate(0)
+with open("directories_output.bat", "w") as file:
+    file.truncate(0)
+with open("files_output.bat", "w") as file:
+    file.truncate(0)
 
 
 url = input('What is your url? ')
@@ -98,4 +100,7 @@ href_regex = r'href=[\'"]?([^\'" >]+)'
 href_links = re.findall(href_regex, html_content)
 
 # Print the href links found
-print(href_links)
+for link in href_links:
+    with open("files_output.bat", "a") as file:
+     file.write(link+"\n")
+    
