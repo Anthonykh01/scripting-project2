@@ -18,11 +18,18 @@ import requests
 # response = requests.get(url)
 
 # print(response.text)
-# url = input('What is your url? ')
-# print('the url is ,', url)
+url = input('What is your url? ')
+print('the url is ,', url)
+after_www=url.split("www.")[1]
 with open('subdomains_dictionary.bat', 'r') as file:
     for line in file:
-        url = 'https://www.'+line.strip()+'.ctflearn.com'
+         
+        line = line.strip()
+        
+        if line.endswith('.'):
+            url = 'https://www.' + line[:-1] + '.' +after_www
+        else:
+            url = 'https://www.' + line + '.' + after_www
         try:
             response = requests.get(url)
             if response.status_code == 200:
@@ -30,19 +37,20 @@ with open('subdomains_dictionary.bat', 'r') as file:
                 print(url)
         except requests.exceptions.ConnectionError:
                 # handle the connection error
-            print(f"Connection to {url} failed")
+                # print('no')
+                null
         #  else:
         #     print('Request failed with status code:', response.status_code)
         #     print(url)
         
 
 
-try:
-    response = requests.get(url)
-    # process the response
-    print(response.text)
-except requests.exceptions.ConnectionError:
-    # handle the connection error
-    print(f"Connection to {url} failed")
-    # continue with the rest of your code
-    # ...
+# try:
+#     response = requests.get(url)
+#     # process the response
+#     print(response.text)
+# except requests.exceptions.ConnectionError:
+#     # handle the connection error
+#     print(f"Connection to {url} failed")
+#     # continue with the rest of your code
+#     # ...
